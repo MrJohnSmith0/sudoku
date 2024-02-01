@@ -165,7 +165,7 @@ public:
 
 		return true;
 	}
-
+	//寻找在同一行，同一列中可填数字量最少的一个位置，提高回溯效率
 	void fill(vector<vector<char>>& board, int& row, int& col)
 	{
 		int count, nMax = -1;
@@ -179,17 +179,18 @@ public:
 					count = 0;
 					for (n = 0; n < 9; n++)
 					{
+						//同一行中的已知个数
 						if (board[i][n] != '.')
 						{
 							count++;
 						}
-
+						//同一列中的已知个数
 						if ((board[n][j] != '.') && (n != i))
 						{
 							count++;
 						}
 					}
-
+					//同一个3*3网格中的已知个数
 					int nCellx = (int)(i / 3);
 					int nCelly = (int)(j / 3);
 					int m;
@@ -203,9 +204,9 @@ public:
 							}
 						}
 					}
-
 					if (nMax < count)
 					{
+						//count最大意味着这个位置可填的数字最少
 						nMax = count;
 						row = i;
 						col = j;
